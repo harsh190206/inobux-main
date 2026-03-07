@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 93.3%;
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 93.3%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 93.3%;
+
+    --primary: 190 75% 52%;
+    --primary-foreground: 0 0% 0%;
+    --primary-glow: 190 75% 62%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 93.3%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 93.3%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 190 75% 52%;
+
+    /* Custom design tokens for Inobux */
+    --hero-gradient: linear-gradient(135deg, hsl(190 75% 52%), hsl(190 75% 62%));
+    --service-gradient: linear-gradient(145deg, hsl(0 0% 5%), hsl(190 75% 10%));
+    --card-shadow: 0 10px 30px -10px hsl(190 75% 52% / 0.1);
+    --glow-shadow: 0 0 40px hsl(190 75% 62% / 0.3);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 5%;
+
+    --sidebar-foreground: 0 0% 93.3%;
+
+    --sidebar-primary: 190 75% 52%;
+
+    --sidebar-primary-foreground: 0 0% 0%;
+
+    --sidebar-accent: 0 0% 15%;
+
+    --sidebar-accent-foreground: 0 0% 93.3%;
+
+    --sidebar-border: 0 0% 15%;
+
+    --sidebar-ring: 190 75% 52%;
+  }
+
+  .dark {
+    --background: 0 0% 6.7%;
+    --foreground: 0 0% 93.3%;
+
+    --card: 0 0% 6.7%;
+    --card-foreground: 0 0% 93.3%;
+
+    --popover: 0 0% 6.7%;
+    --popover-foreground: 0 0% 93.3%;
+
+    --primary: 190 75% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 93.3%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 93.3%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 93.3%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 93.3%;
+    --sidebar-background: 0 0% 6.7%;
+    --sidebar-foreground: 0 0% 93.3%;
+    --sidebar-primary: 0 0% 93.3%;
+    --sidebar-primary-foreground: 0 0% 6.7%;
+    --sidebar-accent: 0 0% 20%;
+    --sidebar-accent-foreground: 0 0% 93.3%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 0% 93.3%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
