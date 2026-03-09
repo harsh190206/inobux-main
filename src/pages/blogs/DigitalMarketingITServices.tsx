@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 import digitalMarketing from "@/assets/blog/digital-marketing.jpg";
 
 const DigitalMarketingITServices = () => {
@@ -8,6 +9,11 @@ const DigitalMarketingITServices = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+      <Seo
+        title="Digital Marketing for IT Services | Inobux Blog"
+        description="Discover digital marketing strategies tailored for IT services, including content, SEO, and lead generation for technology brands."
+        canonicalPath="/blog/digital-marketing-it-services"
+      />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <Button onClick={() => navigate('/')} variant="ghost" className="mb-6 hover:bg-primary/10">
@@ -16,7 +22,7 @@ const DigitalMarketingITServices = () => {
           
           <div className="max-w-4xl mx-auto">
             <div className="relative overflow-hidden rounded-2xl mb-8">
-              <img src={digitalMarketing} alt="Digital Marketing for IT Services" className="w-full h-[400px] object-cover" />
+              <img src={digitalMarketing} alt="Digital Marketing for IT Services" loading="lazy" decoding="async" className="w-full h-[400px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">
                 <h1 className="text-4xl lg:text-5xl font-bold mb-4">Digital Marketing for IT Services</h1>

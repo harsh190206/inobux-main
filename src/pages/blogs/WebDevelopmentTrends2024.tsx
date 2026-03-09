@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 import webDevTrends from "@/assets/blog/web-development-trends.jpg";
 
 const WebDevelopmentTrends2024 = () => {
@@ -8,6 +9,11 @@ const WebDevelopmentTrends2024 = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+      <Seo
+        title="Latest Web Development Trends for 2024 | Inobux Blog"
+        description="Explore the top web development trends for 2024 including AI-powered tools, serverless architectures, PWAs, and modern frontend frameworks."
+        canonicalPath="/blog/web-development-trends-2024"
+      />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -25,6 +31,8 @@ const WebDevelopmentTrends2024 = () => {
               <img 
                 src={webDevTrends} 
                 alt="Latest Web Development Trends for 2024"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[400px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

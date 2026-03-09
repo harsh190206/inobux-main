@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User, Smartphone, Code, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 import reactNativeApps from "@/assets/blog/react-native-apps.jpg";
 
 const ReactNativeCrossPlatform = () => {
@@ -26,6 +27,11 @@ const ReactNativeCrossPlatform = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+      <Seo
+        title="React Native Cross-Platform Apps | Inobux Blog"
+        description="Discover how React Native enables fast cross-platform mobile apps with native performance, shared code, and rapid developer workflows."
+        canonicalPath="/blog/react-native-cross-platform"
+      />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -43,6 +49,8 @@ const ReactNativeCrossPlatform = () => {
               <img 
                 src={reactNativeApps} 
                 alt="Building Cross-Platform Apps with React Native"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[400px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

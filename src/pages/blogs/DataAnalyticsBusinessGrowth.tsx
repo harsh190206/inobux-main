@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User, BarChart3, TrendingUp, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 import dataAnalytics from "@/assets/blog/data-analytics.jpg";
 
 const DataAnalyticsBusinessGrowth = () => {
@@ -26,6 +27,11 @@ const DataAnalyticsBusinessGrowth = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+      <Seo
+        title="Data Analytics for Business Growth | Inobux Blog"
+        description="Learn how data analytics can drive scalable growth, improve decision making, and reveal new opportunities for your business."
+        canonicalPath="/blog/data-analytics-business-growth"
+      />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -43,6 +49,8 @@ const DataAnalyticsBusinessGrowth = () => {
               <img 
                 src={dataAnalytics} 
                 alt="Data Analytics for Business Growth"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[400px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

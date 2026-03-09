@@ -112,6 +112,8 @@ const Portfolio = () => {
                 <img 
                   src={project.image} 
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-64 object-contain bg-gradient-to-br from-primary/5 to-primary-glow/5 group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
