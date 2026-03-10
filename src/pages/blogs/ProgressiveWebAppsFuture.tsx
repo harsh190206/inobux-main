@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 import pwaDevelopment from "@/assets/blog/pwa-development.jpg";
 
 const ProgressiveWebAppsFuture = () => {
@@ -8,6 +9,11 @@ const ProgressiveWebAppsFuture = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+      <Seo
+        title="Progressive Web Apps: The Future of Web | Inobux Blog"
+        description="Learn how Progressive Web Apps combine speed, reliability, and native-like experiences to power the next generation of web applications."
+        canonicalPath="/blog/progressive-web-apps-future"
+      />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <Button onClick={() => navigate('/')} variant="ghost" className="mb-6 hover:bg-primary/10">
@@ -16,7 +22,7 @@ const ProgressiveWebAppsFuture = () => {
           
           <div className="max-w-4xl mx-auto">
             <div className="relative overflow-hidden rounded-2xl mb-8">
-              <img src={pwaDevelopment} alt="Progressive Web Apps: The Future of Web" className="w-full h-[400px] object-cover" />
+              <img src={pwaDevelopment} alt="Progressive Web Apps: The Future of Web" loading="lazy" decoding="async" className="w-full h-[400px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">
                 <h1 className="text-4xl lg:text-5xl font-bold mb-4">Progressive Web Apps: The Future of Web</h1>

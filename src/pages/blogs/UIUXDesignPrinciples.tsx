@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User, Lightbulb } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 import uiUxDesign from "@/assets/blog/ui-ux-design.jpg";
 
 const UIUXDesignPrinciples = () => {
@@ -35,6 +36,11 @@ const UIUXDesignPrinciples = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+      <Seo
+        title="UI/UX Design Principles That Convert | Inobux Blog"
+        description="Learn the core UI/UX design principles that improve conversion rates, usability, and user satisfaction."
+        canonicalPath="/blog/ui-ux-design-principles"
+      />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -52,6 +58,8 @@ const UIUXDesignPrinciples = () => {
               <img 
                 src={uiUxDesign} 
                 alt="UI/UX Design Principles That Convert"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[400px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

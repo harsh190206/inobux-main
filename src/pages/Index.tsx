@@ -5,6 +5,7 @@ import Portfolio from "@/components/Portfolio";
 import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Seo from "@/components/Seo";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -35,6 +36,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title="Inobux | Web Development, Mobile Apps, Data Science & UI/UX"
+        description="Inobux delivers modern web applications, mobile apps, and data science solutions backed by a design-first approach. Explore services, portfolio, and blog insights."
+        canonicalPath="/"
+      />
       <Navigation />
       <Hero />
       <div ref={contentRef} className="relative z-20 bg-background">

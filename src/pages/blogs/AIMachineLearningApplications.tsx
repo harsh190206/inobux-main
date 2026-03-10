@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 import aiMachineLearning from "@/assets/blog/ai-machine-learning.jpg";
 
 const AIMachineLearningApplications = () => {
@@ -8,6 +9,11 @@ const AIMachineLearningApplications = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+      <Seo
+        title="AI & Machine Learning Applications | Inobux Blog"
+        description="Explore real-world AI and machine learning applications, including NLP, computer vision, and predictive analytics for business growth."
+        canonicalPath="/blog/ai-machine-learning-applications"
+      />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <Button onClick={() => navigate('/')} variant="ghost" className="mb-6 hover:bg-primary/10">
@@ -16,7 +22,7 @@ const AIMachineLearningApplications = () => {
           
           <div className="max-w-4xl mx-auto">
             <div className="relative overflow-hidden rounded-2xl mb-8">
-              <img src={aiMachineLearning} alt="AI and Machine Learning Applications" className="w-full h-[400px] object-cover" />
+              <img src={aiMachineLearning} alt="AI and Machine Learning Applications" loading="lazy" decoding="async" className="w-full h-[400px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">
                 <h1 className="text-4xl lg:text-5xl font-bold mb-4">AI and Machine Learning Applications</h1>

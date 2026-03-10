@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User, CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 import freelanceSuccess from "@/assets/blog/freelance-success.jpg";
 
 const FreelanceSuccessIT = () => {
@@ -17,6 +18,11 @@ const FreelanceSuccessIT = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+      <Seo
+        title="Freelance Success in IT | Inobux Blog"
+        description="Learn proven strategies for landing clients, pricing your services, and scaling your freelance IT business."
+        canonicalPath="/blog/freelance-success-it"
+      />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -34,6 +40,8 @@ const FreelanceSuccessIT = () => {
               <img 
                 src={freelanceSuccess} 
                 alt="The Ultimate Guide to Freelance Success in IT"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[400px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
