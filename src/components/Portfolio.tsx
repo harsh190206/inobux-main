@@ -87,6 +87,14 @@ const Portfolio = () => {
       category: "Desktop Application",
       link: "https://pragyarefrigeration.in/"
     },
+    {
+      title: "Kapable Kreation Web",
+      description: "Modern e-commerce landing page for a clothing shopping website, featuring elegant product showcases, smooth animations, and conversion-optimized design for fashion retail.",
+      image: "/kapable.png",
+      tags: ["React", "E-commerce", "Landing Page", "Fashion"],
+      category: "Web Development",
+      link: "https://www.kapablekreation.com/home"
+    },
   ];
 
   return (
