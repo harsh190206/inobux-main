@@ -10,41 +10,36 @@ const Portfolio = () => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
+    const isMobile = window.innerWidth <= 768;
     let animationFrameId: number;
     let isPaused = false;
     const speed = 1.5;
 
     const scroll = () => {
       if (!scrollContainer || isPaused) return;
-
       scrollContainer.scrollLeft += speed;
-
       if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
         scrollContainer.scrollLeft = 0;
       }
-
       animationFrameId = requestAnimationFrame(scroll);
     };
 
-    animationFrameId = requestAnimationFrame(scroll);
+    if (!isMobile) animationFrameId = requestAnimationFrame(scroll);
 
-    const handleMouseEnter = () => {
-      isPaused = true;
-    };
+    const pause = () => { isPaused = true; };
+    const resume = () => { if (!isPaused) return; isPaused = false; animationFrameId = requestAnimationFrame(scroll); };
 
-    const handleMouseLeave = () => {
-      if (!isPaused) return;
-      isPaused = false;
-      animationFrameId = requestAnimationFrame(scroll);
-    };
-
-    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
-    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
+    scrollContainer.addEventListener("mouseenter", pause);
+    scrollContainer.addEventListener("mouseleave", resume);
+    scrollContainer.addEventListener("touchstart", pause, { passive: true });
+    scrollContainer.addEventListener("touchend", resume, { passive: true });
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
-      scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
+      scrollContainer.removeEventListener("mouseenter", pause);
+      scrollContainer.removeEventListener("mouseleave", resume);
+      scrollContainer.removeEventListener("touchstart", pause);
+      scrollContainer.removeEventListener("touchend", resume);
     };
   }, []);
 
@@ -111,11 +106,11 @@ const Portfolio = () => {
 
         <div 
           ref={scrollRef}
-          className="flex gap-8 overflow-x-auto scrollbar-hide mb-12"
+          className="flex gap-6 overflow-x-auto scrollbar-hide mb-12"
           style={{ maxWidth: '1600px', marginLeft: 'auto', marginRight: 'auto' }}
         >
           {[...projects, ...projects].map((project, index) => (
-            <Card key={index} className="group flex-shrink-0 w-[400px] snap-start overflow-hidden hover:shadow-card-shadow transition-all duration-300 hover:-translate-y-2 bg-card/50 backdrop-blur-sm border-border/50">
+            <Card key={index} className="group flex-shrink-0 w-[280px] sm:w-[400px] snap-start overflow-hidden hover:shadow-card-shadow transition-all duration-300 hover:-translate-y-2 bg-card/50 backdrop-blur-sm border-border/50">
               <div className="relative overflow-hidden">
                 <img 
                   src={project.image} 

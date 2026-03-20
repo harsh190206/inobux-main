@@ -22,6 +22,13 @@ const FreelanceSuccessIT = () => {
         title="Freelance Success in IT | Inobux Blog"
         description="Learn proven strategies for landing clients, pricing your services, and scaling your freelance IT business."
         canonicalPath="/blog/freelance-success-it"
+        openGraphType="article"
+        articleDate="2023-12-12"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "Freelance Success in IT", path: "/blog/freelance-success-it" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}

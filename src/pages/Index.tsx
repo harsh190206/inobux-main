@@ -18,6 +18,7 @@ const Index = () => {
   useEffect(() => {
     const content = contentRef.current;
     if (!content) return;
+    if (window.innerWidth <= 768) return; // skip scroll animation on mobile
 
     gsap.fromTo(
       content,
@@ -43,7 +44,7 @@ const Index = () => {
       />
       <Navigation />
       <Hero />
-      <div ref={contentRef} className="relative z-20 bg-background">
+      <div ref={contentRef} className="relative z-20 bg-background md:sticky-none">
         <Services />
         <Portfolio />
         <Blog />

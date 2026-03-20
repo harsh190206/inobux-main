@@ -31,6 +31,13 @@ const DataAnalyticsBusinessGrowth = () => {
         title="Data Analytics for Business Growth | Inobux Blog"
         description="Learn how data analytics can drive scalable growth, improve decision making, and reveal new opportunities for your business."
         canonicalPath="/blog/data-analytics-business-growth"
+        openGraphType="article"
+        articleDate="2023-12-05"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "Data Analytics for Business Growth", path: "/blog/data-analytics-business-growth" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}

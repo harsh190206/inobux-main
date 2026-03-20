@@ -40,6 +40,13 @@ const UIUXDesignPrinciples = () => {
         title="UI/UX Design Principles That Convert | Inobux Blog"
         description="Learn the core UI/UX design principles that improve conversion rates, usability, and user satisfaction."
         canonicalPath="/blog/ui-ux-design-principles"
+        openGraphType="article"
+        articleDate="2023-12-10"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "UI/UX Design Principles", path: "/blog/ui-ux-design-principles" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}

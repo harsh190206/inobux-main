@@ -13,6 +13,13 @@ const WebDevelopmentTrends2024 = () => {
         title="Latest Web Development Trends for 2024 | Inobux Blog"
         description="Explore the top web development trends for 2024 including AI-powered tools, serverless architectures, PWAs, and modern frontend frameworks."
         canonicalPath="/blog/web-development-trends-2024"
+        openGraphType="article"
+        articleDate="2023-12-15"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "Web Development Trends 2024", path: "/blog/web-development-trends-2024" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}

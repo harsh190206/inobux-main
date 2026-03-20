@@ -13,6 +13,13 @@ const CloudDevOpsIntegration = () => {
         title="Cloud & DevOps Integration Strategies | Inobux Blog"
         description="Learn how to integrate cloud infrastructure with DevOps practices to improve deployment speed, reliability, and scalability."
         canonicalPath="/blog/cloud-devops-integration"
+        openGraphType="article"
+        articleDate="2023-11-30"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "Cloud & DevOps Integration", path: "/blog/cloud-devops-integration" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

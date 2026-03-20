@@ -13,6 +13,13 @@ const EcommerceDevelopmentPractices = () => {
         title="E-commerce Development Best Practices | Inobux Blog"
         description="Discover proven e-commerce development best practices to build fast, secure, and high-converting online stores."
         canonicalPath="/blog/ecommerce-development-practices"
+        openGraphType="article"
+        articleDate="2023-12-03"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "E-commerce Development Practices", path: "/blog/ecommerce-development-practices" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

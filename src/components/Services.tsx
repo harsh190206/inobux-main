@@ -86,7 +86,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
           {services.map((service, index) => (
             <Card key={index} className="group hover:shadow-card-shadow transition-all duration-300 hover:-translate-y-2 bg-card/50 backdrop-blur-sm border-border/50">
               <CardHeader className="text-center">

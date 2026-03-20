@@ -13,6 +13,13 @@ const AIMachineLearningApplications = () => {
         title="AI & Machine Learning Applications | Inobux Blog"
         description="Explore real-world AI and machine learning applications, including NLP, computer vision, and predictive analytics for business growth."
         canonicalPath="/blog/ai-machine-learning-applications"
+        openGraphType="article"
+        articleDate="2023-11-25"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "AI & Machine Learning Applications", path: "/blog/ai-machine-learning-applications" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

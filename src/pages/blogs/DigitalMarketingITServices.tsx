@@ -13,6 +13,13 @@ const DigitalMarketingITServices = () => {
         title="Digital Marketing for IT Services | Inobux Blog"
         description="Discover digital marketing strategies tailored for IT services, including content, SEO, and lead generation for technology brands."
         canonicalPath="/blog/digital-marketing-it-services"
+        openGraphType="article"
+        articleDate="2023-11-28"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "Digital Marketing for IT Services", path: "/blog/digital-marketing-it-services" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

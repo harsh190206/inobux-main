@@ -5,14 +5,14 @@ import { Mail, Clock, MapPin } from "lucide-react";
 const Contact = () => {
 
   return (
-    <section id="contact" className="py-40 relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-40 relative overflow-hidden">
       {/* Subtle radial gradient background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/8 via-background to-background"></div>
       
       <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-7xl">
         {/* Top Header Area */}
-        <div className="text-center mb-24 space-y-6">
-          <h2 className="text-5xl lg:text-7xl font-bold tracking-tight">
+        <div className="text-center mb-12 md:mb-24 space-y-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight">
             Get In <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">Touch</span>
           </h2>
           <p className="text-xl text-muted-foreground/60 max-w-3xl mx-auto leading-relaxed">
@@ -22,12 +22,12 @@ const Contact = () => {
         </div>
 
         {/* Two-Column Layout */}
-        <div className="grid lg:grid-cols-5 gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-20 items-start">
           
           {/* LEFT COLUMN - Trust & Credibility */}
-          <div className="lg:col-span-2 space-y-16">
+          <div className="lg:col-span-2 space-y-10 lg:space-y-16">
             <div className="space-y-6">
-              <h3 className="text-3xl font-bold">Let's Start a Conversation</h3>
+              <h3 className="text-2xl sm:text-3xl font-bold">Let's Start a Conversation</h3>
               <p className="text-muted-foreground/60 leading-relaxed">
                 We're here to help you succeed. Whether you need a custom web application, mobile app, data analytics solution, or UI/UX design, our team is ready to deliver exceptional results.
               </p>
@@ -107,10 +107,10 @@ const Contact = () => {
           {/* RIGHT COLUMN - Main Conversion Card */}
           <div className="lg:col-span-3">
             <Card className="bg-card/20 backdrop-blur-2xl border-border/20 shadow-2xl">
-              <CardContent className="p-12 space-y-10">
+              <CardContent className="p-6 sm:p-12 space-y-10">
                 {/* Card Header */}
                 <div className="space-y-4 text-center">
-                  <h3 className="text-3xl font-bold">Ready to Start?</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold">Ready to Start?</h3>
                   <p className="text-muted-foreground/60 leading-relaxed max-w-md mx-auto">
                     Click the button below to send us an email directly through Gmail and let's discuss your project.
                   </p>

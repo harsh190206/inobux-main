@@ -13,6 +13,13 @@ const ProgressiveWebAppsFuture = () => {
         title="Progressive Web Apps: The Future of Web | Inobux Blog"
         description="Learn how Progressive Web Apps combine speed, reliability, and native-like experiences to power the next generation of web applications."
         canonicalPath="/blog/progressive-web-apps-future"
+        openGraphType="article"
+        articleDate="2023-11-22"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "Progressive Web Apps Future", path: "/blog/progressive-web-apps-future" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

@@ -31,6 +31,13 @@ const ReactNativeCrossPlatform = () => {
         title="React Native Cross-Platform Apps | Inobux Blog"
         description="Discover how React Native enables fast cross-platform mobile apps with native performance, shared code, and rapid developer workflows."
         canonicalPath="/blog/react-native-cross-platform"
+        openGraphType="article"
+        articleDate="2023-12-08"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/#blog" },
+          { name: "React Native Cross-Platform", path: "/blog/react-native-cross-platform" }
+        ]}
       />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}

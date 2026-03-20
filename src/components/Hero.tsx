@@ -51,38 +51,38 @@ const Hero = () => {
   };
 
   return (
-    <section ref={heroRef} id="home" className="min-h-screen flex items-center relative overflow-hidden sticky top-0">
+    <section ref={heroRef} id="home" className="min-h-screen flex items-center relative overflow-hidden md:sticky top-0">
       <AnimatedShaderBackground />
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             <div className="space-y-4">
-              <h1 ref={titleRef} className="text-4xl lg:text-6xl font-bold leading-tight drop-shadow-[0_0_30px_rgba(38,193,231,0.5)]">
-                Transform Your Business with   
-                <span className="bg-gradient-to-r ml-3 from-primary to-primary-glow bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(38,193,231,0.6)]">
-                   Expert IT Solutions
+              <h1 ref={titleRef} className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight drop-shadow-[0_0_30px_rgba(38,193,231,0.5)]">
+                Transform Your Business with
+                <span className="bg-gradient-to-r ml-2 from-primary to-primary-glow bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(38,193,231,0.6)]">
+                  {" "}Expert IT Solutions
                 </span>
               </h1>
-              <p ref={descRef} className="text-xl text-muted-foreground max-w-2xl mx-auto drop-shadow-[0_0_20px_rgba(38,193,231,0.3)]">
-                InoBux delivers cutting-edge web development, mobile apps, data science, and UI/UX design services. 
+              <p ref={descRef} className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto drop-shadow-[0_0_20px_rgba(38,193,231,0.3)] px-2">
+                InoBux delivers cutting-edge web development, mobile apps, data science, and UI/UX design services.
                 We turn your ideas into powerful digital experiences that drive growth.
               </p>
             </div>
 
-            <div ref={buttonsRef} className="flex flex-wrap gap-4 justify-center">
-              <Button 
-                size="lg" 
+            <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
+              <Button
+                size="lg"
                 onClick={scrollToContact}
-                className="bg-gradient-to-r from-primary to-primary-glow hover:shadow-[0_0_40px_rgba(38,193,231,0.6)] shadow-[0_0_20px_rgba(38,193,231,0.4)] hover:scale-110 transition-all duration-300"
+                className="bg-gradient-to-r from-primary to-primary-glow hover:shadow-[0_0_40px_rgba(38,193,231,0.6)] shadow-[0_0_20px_rgba(38,193,231,0.4)] hover:scale-110 transition-all duration-300 w-full sm:w-auto"
               >
                 Start Your Project
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 onClick={scrollToServices}
-                className="border-primary/20 hover:bg-primary/5 hover:shadow-[0_0_30px_rgba(38,193,231,0.4)] hover:scale-110 transition-all duration-300"
+                className="border-primary/20 hover:bg-primary/5 hover:shadow-[0_0_30px_rgba(38,193,231,0.4)] hover:scale-110 transition-all duration-300 w-full sm:w-auto"
               >
                 View Services
               </Button>
