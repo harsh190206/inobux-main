@@ -18,11 +18,11 @@ const Index = () => {
   useEffect(() => {
     const content = contentRef.current;
     if (!content) return;
-    if (window.innerWidth <= 768) return; // skip scroll animation on mobile
+    if (window.innerWidth <= 768) return;
 
     gsap.fromTo(
       content,
-      { y: "100vh" },
+      { y: 0 },
       {
         y: 0,
         scrollTrigger: {

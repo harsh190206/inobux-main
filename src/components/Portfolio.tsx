@@ -90,20 +90,6 @@ const Portfolio = () => {
       category: "Web Development",
       link: "https://www.kapablekreation.com/home"
     },
-    {
-      title: "Enterprise ERP System",
-      description: "Full-featured Enterprise Resource Planning system with modules for inventory management, HR, payroll, accounting, and real-time reporting dashboards for streamlined business operations.",
-      image: "/ERP.jpg",
-      tags: ["React", "Node.js", "PostgreSQL", "ERP"],
-      category: "Enterprise Software"
-    },
-    {
-      title: "CRM Platform",
-      description: "Customer Relationship Management platform with lead tracking, sales pipeline management, automated follow-ups, analytics, and team collaboration tools to boost sales performance.",
-      image: "/CRM.jpg",
-      tags: ["React", "TypeScript", "CRM", "Analytics"],
-      category: "Enterprise Software"
-    },
   ];
 
   return (

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code, Smartphone, BarChart3, Palette, ArrowRight } from "lucide-react";
+import { Code, Smartphone, BarChart3, Palette, Building2, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -16,7 +16,7 @@ const Services = () => {
     gsap.from(titleRef.current, {
       scrollTrigger: {
         trigger: titleRef.current,
-        start: "top 80%",
+        start: "top 100%",
       },
       opacity: 0,
       y: 50,
@@ -28,13 +28,13 @@ const Services = () => {
     cards.forEach((card, index) => {
       gsap.from(card, {
         scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
+          trigger: cardsRef.current,
+          start: "top 110%",
         },
         opacity: 0,
-        y: 50,
-        duration: 0.8,
-        delay: index * 0.1,
+        y: 40,
+        duration: 0.6,
+        delay: index * 0.08,
         ease: "power3.out"
       });
     });
@@ -65,6 +65,18 @@ const Services = () => {
       description: "User-centered design that creates intuitive and engaging digital experiences for your audience.",
       features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
     },
+    {
+      icon: <Building2 className="h-8 w-8 text-primary" />,
+      title: "ERP Solutions",
+      description: "End-to-end Enterprise Resource Planning systems to unify your business operations, from inventory and HR to accounting and reporting.",
+      features: ["Inventory Management", "HR & Payroll", "Accounting", "Real-time Dashboards"],
+    },
+    {
+      icon: <Users className="h-8 w-8 text-primary" />,
+      title: "CRM Development",
+      description: "Custom Customer Relationship Management platforms to manage leads, automate follow-ups, and drive sales growth with actionable insights.",
+      features: ["Lead Tracking", "Sales Pipeline", "Automated Follow-ups", "Team Collaboration"],
+    },
   ];
 
   const scrollToContact = () => {
@@ -86,7 +98,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
           {services.map((service, index) => (
             <Card key={index} className="group hover:shadow-card-shadow transition-all duration-300 hover:-translate-y-2 bg-card/50 backdrop-blur-sm border-border/50">
               <CardHeader className="text-center">
