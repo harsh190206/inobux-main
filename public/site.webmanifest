@@ -1,0 +1,21 @@
+{
+  "name": "InoBux",
+  "short_name": "InoBux",
+  "description": "InoBux builds AI solutions, web platforms, mobile apps, ERP systems, CRM software, analytics experiences, and UI/UX design systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020817",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

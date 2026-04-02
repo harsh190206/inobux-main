@@ -54,6 +54,8 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
+      target: ["chrome90", "edge90", "firefox90", "safari15"],
+      cssTarget: "safari15",
       rollupOptions: {
         output: {
           manualChunks(id) {

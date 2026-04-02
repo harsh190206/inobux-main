@@ -13,7 +13,7 @@ const Contact = () => {
       <div className="floating-orb left-[-5%] top-24 h-72 w-72 bg-primary/18" />
       <div className="floating-orb bottom-10 right-[-5%] h-80 w-80 bg-primary-glow/18" />
 
-      <div className="mx-auto flex max-w-7xl flex-col gap-14">
+      <div className="page-shell flex flex-col gap-14">
         <SectionHeader
           eyebrow="Get In Touch"
           title="A high-conviction contact experience with clear next steps and fast response cues"

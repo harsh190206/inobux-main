@@ -9,6 +9,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import SiteTracking from "@/components/SiteTracking";
 
 const WebDevelopmentTrends2024 = lazy(() => import("./pages/blogs/WebDevelopmentTrends2024"));
 const FreelanceSuccessIT = lazy(() => import("./pages/blogs/FreelanceSuccessIT"));
@@ -27,47 +28,54 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem={true}
-      disableTransitionOnChange
-    >
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Suspense
-            fallback={
-              <div className="flex min-h-screen items-center justify-center bg-background text-muted-foreground">
-                Loading...
-              </div>
-            }
-          >
-            <Routes>
-              <Route path="/" element={<Index />} />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem={true}
+        disableTransitionOnChange
+      >
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <a
+              href="#main-content"
+              className="sr-only z-[60] rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+            >
+              Skip to content
+            </a>
+            <SiteTracking />
+            <Suspense
+              fallback={
+                <div className="flex min-h-screen items-center justify-center bg-background text-muted-foreground">
+                  Loading...
+                </div>
+              }
+            >
+              <Routes>
+                <Route path="/" element={<Index />} />
 
-              {/* Blog Routes */}
-              <Route path="/blog/web-development-trends-2024" element={<WebDevelopmentTrends2024 />} />
-              <Route path="/blog/freelance-success-it" element={<FreelanceSuccessIT />} />
-              <Route path="/blog/ui-ux-design-principles" element={<UIUXDesignPrinciples />} />
-              <Route path="/blog/react-native-cross-platform" element={<ReactNativeCrossPlatform />} />
-              <Route path="/blog/data-analytics-business-growth" element={<DataAnalyticsBusinessGrowth />} />
-              <Route path="/blog/ecommerce-development-practices" element={<EcommerceDevelopmentPractices />} />
-              <Route path="/blog/cloud-devops-integration" element={<CloudDevOpsIntegration />} />
-              <Route path="/blog/digital-marketing-it-services" element={<DigitalMarketingITServices />} />
-              <Route path="/blog/ai-machine-learning-applications" element={<AIMachineLearningApplications />} />
-              <Route path="/blog/progressive-web-apps-future" element={<ProgressiveWebAppsFuture />} />
+                {/* Blog Routes */}
+                <Route path="/blog/web-development-trends-2024" element={<WebDevelopmentTrends2024 />} />
+                <Route path="/blog/freelance-success-it" element={<FreelanceSuccessIT />} />
+                <Route path="/blog/ui-ux-design-principles" element={<UIUXDesignPrinciples />} />
+                <Route path="/blog/react-native-cross-platform" element={<ReactNativeCrossPlatform />} />
+                <Route path="/blog/data-analytics-business-growth" element={<DataAnalyticsBusinessGrowth />} />
+                <Route path="/blog/ecommerce-development-practices" element={<EcommerceDevelopmentPractices />} />
+                <Route path="/blog/cloud-devops-integration" element={<CloudDevOpsIntegration />} />
+                <Route path="/blog/digital-marketing-it-services" element={<DigitalMarketingITServices />} />
+                <Route path="/blog/ai-machine-learning-applications" element={<AIMachineLearningApplications />} />
+                <Route path="/blog/progressive-web-apps-future" element={<ProgressiveWebAppsFuture />} />
 
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

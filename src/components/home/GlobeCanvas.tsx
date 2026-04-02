@@ -1,5 +1,31 @@
 import { useEffect, useRef } from "react";
-import * as THREE from "three";
+import {
+  AmbientLight,
+  BackSide,
+  BufferAttribute,
+  BufferGeometry,
+  Color,
+  DirectionalLight,
+  Group,
+  Line,
+  LineBasicMaterial,
+  LineSegments,
+  MathUtils,
+  Mesh,
+  MeshBasicMaterial,
+  MeshPhongMaterial,
+  PerspectiveCamera,
+  PointLight,
+  Points,
+  PointsMaterial,
+  QuadraticBezierCurve3,
+  Scene,
+  SphereGeometry,
+  SRGBColorSpace,
+  Vector3,
+  WebGLRenderer,
+  WireframeGeometry,
+} from "three";
 
 const isReducedMotion = () =>
   typeof window !== "undefined" &&
@@ -12,93 +38,120 @@ const GlobeCanvas = () => {
     const container = containerRef.current;
     if (!container) return;
 
-    const width = container.clientWidth;
-    const height = container.clientHeight || width;
+    const width = Math.max(container.clientWidth, 1);
+    const height = Math.max(container.clientHeight || width, 1);
     const mobile = window.innerWidth < 768;
+    const reducedMotion = isReducedMotion();
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(36, width / height, 0.1, 100);
     camera.position.set(0, 0.2, 5.4);
 
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: !mobile,
-      powerPreference: "high-performance",
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2));
+    let renderer: WebGLRenderer;
+    try {
+      renderer = new WebGLRenderer({
+        alpha: true,
+        antialias: !mobile,
+        powerPreference: "high-performance",
+      });
+    } catch {
+      return;
+    }
+
+    renderer.setClearAlpha(0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.3 : 1.8));
     renderer.setSize(width, height);
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.outputColorSpace = SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    const group = new THREE.Group();
+    const disposableGeometries: BufferGeometry[] = [];
+    const disposableMaterials: Array<{ dispose: () => void }> = [];
+
+    const group = new Group();
     scene.add(group);
 
-    const globeGeometry = new THREE.SphereGeometry(1.55, 44, 44);
-    const globeMaterial = new THREE.MeshPhongMaterial({
-      color: new THREE.Color("#0b1a2c"),
-      emissive: new THREE.Color("#00aee1"),
+    const globeGeometry = new SphereGeometry(1.55, mobile ? 32 : 40, mobile ? 32 : 40);
+    const globeMaterial = new MeshPhongMaterial({
+      color: new Color("#0b1a2c"),
+      emissive: new Color("#00aee1"),
       emissiveIntensity: 0.1,
       shininess: 80,
-      specular: new THREE.Color("#81e3ff"),
+      specular: new Color("#81e3ff"),
       transparent: true,
       opacity: 0.92,
     });
-    const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+    disposableGeometries.push(globeGeometry);
+    disposableMaterials.push(globeMaterial);
+
+    const globe = new Mesh(globeGeometry, globeMaterial);
     group.add(globe);
 
-    const wireframe = new THREE.LineSegments(
-      new THREE.WireframeGeometry(new THREE.SphereGeometry(1.58, 20, 20)),
-      new THREE.LineBasicMaterial({
-        color: new THREE.Color("#62dfff"),
-        transparent: true,
-        opacity: 0.24,
-      }),
-    );
+    const wireframeSphere = new SphereGeometry(1.58, 18, 18);
+    const wireframeGeometry = new WireframeGeometry(wireframeSphere);
+    const wireframeMaterial = new LineBasicMaterial({
+      color: new Color("#62dfff"),
+      transparent: true,
+      opacity: 0.24,
+    });
+    disposableGeometries.push(wireframeSphere, wireframeGeometry);
+    disposableMaterials.push(wireframeMaterial);
+
+    const wireframe = new LineSegments(wireframeGeometry, wireframeMaterial);
     group.add(wireframe);
 
-    const atmosphere = new THREE.Mesh(
-      new THREE.SphereGeometry(1.9, 32, 32),
-      new THREE.MeshBasicMaterial({
-        color: new THREE.Color("#00c2ff"),
-        transparent: true,
-        opacity: 0.08,
-        side: THREE.BackSide,
-      }),
-    );
+    const atmosphereGeometry = new SphereGeometry(1.9, 28, 28);
+    const atmosphereMaterial = new MeshBasicMaterial({
+      color: new Color("#00c2ff"),
+      transparent: true,
+      opacity: 0.08,
+      side: BackSide,
+    });
+    disposableGeometries.push(atmosphereGeometry);
+    disposableMaterials.push(atmosphereMaterial);
+
+    const atmosphere = new Mesh(atmosphereGeometry, atmosphereMaterial);
     group.add(atmosphere);
 
-    const starGeometry = new THREE.BufferGeometry();
-    const starCount = mobile ? 500 : 900;
+    const starGeometry = new BufferGeometry();
+    const starCount = mobile ? 320 : 640;
     const starVertices = new Float32Array(starCount * 3);
     for (let i = 0; i < starCount; i += 1) {
-      const radius = THREE.MathUtils.randFloat(4.2, 8.4);
-      const theta = THREE.MathUtils.randFloatSpread(360);
-      const phi = THREE.MathUtils.randFloatSpread(360);
-      const vector = new THREE.Vector3()
-        .setFromSphericalCoords(radius, THREE.MathUtils.degToRad(theta), THREE.MathUtils.degToRad(phi));
+      const radius = MathUtils.randFloat(4.2, 8.4);
+      const theta = MathUtils.randFloatSpread(360);
+      const phi = MathUtils.randFloatSpread(360);
+      const vector = new Vector3().setFromSphericalCoords(
+        radius,
+        MathUtils.degToRad(theta),
+        MathUtils.degToRad(phi),
+      );
       starVertices[i * 3] = vector.x;
       starVertices[i * 3 + 1] = vector.y;
       starVertices[i * 3 + 2] = vector.z;
     }
-    starGeometry.setAttribute("position", new THREE.BufferAttribute(starVertices, 3));
-    const stars = new THREE.Points(
-      starGeometry,
-      new THREE.PointsMaterial({
-        color: new THREE.Color("#9eeeff"),
-        size: mobile ? 0.03 : 0.024,
-        transparent: true,
-        opacity: 0.8,
-      }),
-    );
+
+    starGeometry.setAttribute("position", new BufferAttribute(starVertices, 3));
+    const starsMaterial = new PointsMaterial({
+      color: new Color("#9eeeff"),
+      size: mobile ? 0.03 : 0.024,
+      transparent: true,
+      opacity: 0.78,
+    });
+    disposableGeometries.push(starGeometry);
+    disposableMaterials.push(starsMaterial);
+
+    const stars = new Points(starGeometry, starsMaterial);
     scene.add(stars);
 
-    const markerMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color("#baf5ff") });
-    const markerGeometry = new THREE.SphereGeometry(0.04, 12, 12);
-    const arcMaterial = new THREE.LineBasicMaterial({
-      color: new THREE.Color("#00d4ff"),
+    const markerMaterial = new MeshBasicMaterial({ color: new Color("#baf5ff") });
+    const markerGeometry = new SphereGeometry(0.04, 12, 12);
+    const arcMaterial = new LineBasicMaterial({
+      color: new Color("#00d4ff"),
       transparent: true,
       opacity: 0.42,
     });
+    disposableGeometries.push(markerGeometry);
+    disposableMaterials.push(markerMaterial, arcMaterial);
 
     const markerPositions = [
       [0.4, 0.85],
@@ -107,46 +160,67 @@ const GlobeCanvas = () => {
       [2.2, 3.15],
       [0.95, 4.4],
       [1.8, 5.15],
-    ];
+    ] as const;
 
     markerPositions.forEach(([lat, lon], index) => {
-      const position = new THREE.Vector3().setFromSphericalCoords(1.58, lat, lon);
-      const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+      const position = new Vector3().setFromSphericalCoords(1.58, lat, lon);
+      const marker = new Mesh(markerGeometry, markerMaterial);
       marker.position.copy(position);
       group.add(marker);
 
       if (index === 0) return;
-      const previous = new THREE.Vector3().setFromSphericalCoords(
+
+      const previous = new Vector3().setFromSphericalCoords(
         1.58,
         markerPositions[index - 1][0],
         markerPositions[index - 1][1],
       );
       const mid = previous.clone().add(position).multiplyScalar(0.5).normalize().multiplyScalar(2.2);
-      const curve = new THREE.QuadraticBezierCurve3(previous, mid, position);
-      const points = curve.getPoints(40);
-      const arc = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), arcMaterial);
+      const curve = new QuadraticBezierCurve3(previous, mid, position);
+      const points = curve.getPoints(32);
+      const arcGeometry = new BufferGeometry().setFromPoints(points);
+      disposableGeometries.push(arcGeometry);
+
+      const arc = new Line(arcGeometry, arcMaterial);
       group.add(arc);
     });
 
-    const ambientLight = new THREE.AmbientLight("#d8fbff", 0.9);
-    const directionalLight = new THREE.DirectionalLight("#7edfff", 1.9);
+    const ambientLight = new AmbientLight("#d8fbff", 0.9);
+    const directionalLight = new DirectionalLight("#7edfff", 1.9);
     directionalLight.position.set(4, 3, 5);
-    const rimLight = new THREE.PointLight("#00d4ff", 1.3, 12);
+    const rimLight = new PointLight("#00d4ff", 1.2, 12);
     rimLight.position.set(-3, -2, 4);
     scene.add(ambientLight, directionalLight, rimLight);
 
     let frameId = 0;
     let pointerX = 0;
     let pointerY = 0;
-    const reducedMotion = isReducedMotion();
+    let disposed = false;
+    let inViewport = true;
+    let pageVisible = !document.hidden;
 
-    const animate = () => {
-      frameId = window.requestAnimationFrame(animate);
-      group.rotation.y += reducedMotion ? 0.0018 : 0.0038;
+    const renderScene = () => {
+      frameId = 0;
+      if (disposed || !inViewport || !pageVisible) return;
+
+      group.rotation.y += reducedMotion ? 0.0014 : 0.0034;
       group.rotation.x += (pointerY * 0.18 - group.rotation.x) * 0.03;
       group.rotation.z += (pointerX * 0.1 - group.rotation.z) * 0.03;
       stars.rotation.y -= 0.0008;
       renderer.render(scene, camera);
+      frameId = window.requestAnimationFrame(renderScene);
+    };
+
+    const startAnimation = () => {
+      if (!frameId && !disposed && inViewport && pageVisible) {
+        frameId = window.requestAnimationFrame(renderScene);
+      }
+    };
+
+    const stopAnimation = () => {
+      if (!frameId) return;
+      window.cancelAnimationFrame(frameId);
+      frameId = 0;
     };
 
     const handlePointerMove = (event: PointerEvent) => {
@@ -156,28 +230,68 @@ const GlobeCanvas = () => {
     };
 
     const handleResize = () => {
-      const nextWidth = container.clientWidth;
-      const nextHeight = container.clientHeight || nextWidth;
+      const nextWidth = Math.max(container.clientWidth, 1);
+      const nextHeight = Math.max(container.clientHeight || nextWidth, 1);
+      const nextMobile = window.innerWidth < 768;
+
       camera.aspect = nextWidth / nextHeight;
       camera.updateProjectionMatrix();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, nextMobile ? 1.3 : 1.8));
       renderer.setSize(nextWidth, nextHeight);
     };
 
-    container.addEventListener("pointermove", handlePointerMove);
-    window.addEventListener("resize", handleResize);
-    animate();
+    const handleVisibilityChange = () => {
+      pageVisible = !document.hidden;
+
+      if (pageVisible) {
+        startAnimation();
+        return;
+      }
+
+      stopAnimation();
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inViewport = Boolean(entry?.isIntersecting);
+
+        if (inViewport) {
+          startAnimation();
+          return;
+        }
+
+        stopAnimation();
+      },
+      { threshold: 0.08 },
+    );
+
+    observer.observe(container);
+
+    if (finePointer) {
+      container.addEventListener("pointermove", handlePointerMove, { passive: true });
+    }
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    startAnimation();
 
     return () => {
-      window.cancelAnimationFrame(frameId);
+      disposed = true;
+      stopAnimation();
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
-      container.removeEventListener("pointermove", handlePointerMove);
-      container.removeChild(renderer.domElement);
-      globeGeometry.dispose();
-      globeMaterial.dispose();
-      starGeometry.dispose();
-      markerGeometry.dispose();
-      markerMaterial.dispose();
-      arcMaterial.dispose();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+
+      if (finePointer) {
+        container.removeEventListener("pointermove", handlePointerMove);
+      }
+
+      if (renderer.domElement.parentElement === container) {
+        container.removeChild(renderer.domElement);
+      }
+
+      disposableGeometries.forEach((geometry) => geometry.dispose());
+      disposableMaterials.forEach((material) => material.dispose());
       renderer.dispose();
     };
   }, []);

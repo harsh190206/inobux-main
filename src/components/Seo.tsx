@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import { siteConfig } from "@/config/site.js";
 
-const BASE_URL = "https://www.inobux.com";
+const BASE_URL = siteConfig.url;
 
 function setMeta(name: string, content?: string) {
   if (!content) return;
@@ -9,11 +10,19 @@ function setMeta(name: string, content?: string) {
   el.content = content;
 }
 
+function removeMeta(name: string) {
+  document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`)?.remove();
+}
+
 function setMetaProperty(property: string, content?: string) {
   if (!content) return;
   let el = document.head.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
   if (!el) { el = document.createElement("meta"); el.setAttribute("property", property); document.head.appendChild(el); }
   el.content = content;
+}
+
+function removeMetaProperty(property: string) {
+  document.head.querySelector<HTMLMetaElement>(`meta[property="${property}"]`)?.remove();
 }
 
 function setCanonical(url: string) {
@@ -31,6 +40,10 @@ function setStructuredData(id: string, json: object) {
     document.head.appendChild(script);
   }
   script.text = JSON.stringify(json);
+}
+
+function removeStructuredData(id: string) {
+  document.head.querySelector<HTMLScriptElement>(`script[data-seo="${id}"]`)?.remove();
 }
 
 type SeoProps = {
@@ -57,42 +70,53 @@ export default function Seo({
   keywords,
 }: SeoProps) {
   useEffect(() => {
+    const resolvedTitle = title || siteConfig.defaultTitle;
+    const resolvedDescription = description || siteConfig.defaultDescription;
+    const resolvedKeywords = keywords && keywords.length > 0 ? keywords : siteConfig.defaultKeywords;
     const canonicalUrl = canonicalPath
       ? canonicalPath.startsWith("http") ? canonicalPath : `${BASE_URL}${canonicalPath}`
       : BASE_URL;
 
-    const ogImage = openGraphImage || `${BASE_URL}/logo1.png`;
+    const ogImage = openGraphImage
+      ? openGraphImage.startsWith("http")
+        ? openGraphImage
+        : `${BASE_URL}${openGraphImage}`
+      : `${BASE_URL}${siteConfig.logoPath}`;
 
-    if (title) {
-      document.title = title;
-      setMetaProperty("og:title", title);
-      setMeta("twitter:title", title);
-    }
+    document.title = resolvedTitle;
+    setMetaProperty("og:title", resolvedTitle);
+    setMeta("twitter:title", resolvedTitle);
 
-    if (description) {
-      setMeta("description", description);
-      setMetaProperty("og:description", description);
-      setMeta("twitter:description", description);
-    }
+    setMeta("description", resolvedDescription);
+    setMetaProperty("og:description", resolvedDescription);
+    setMeta("twitter:description", resolvedDescription);
 
-    if (keywords && keywords.length > 0) {
-      setMeta("keywords", keywords.join(", "));
-    }
+    setMeta("keywords", resolvedKeywords.join(", "));
 
     setCanonical(canonicalUrl);
     setMetaProperty("og:url", canonicalUrl);
     setMetaProperty("og:type", openGraphType);
     setMetaProperty("og:image", ogImage);
+    setMetaProperty("og:image:alt", title || siteConfig.name);
     setMetaProperty("og:image:width", "1200");
     setMetaProperty("og:image:height", "630");
-    setMetaProperty("og:site_name", "InoBux");
-    setMetaProperty("og:locale", "en_US");
+    setMetaProperty("og:site_name", siteConfig.name);
+    setMetaProperty("og:locale", siteConfig.locale);
     setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:site", siteConfig.twitterSite);
+    setMeta("twitter:creator", siteConfig.twitterSite);
     setMeta("twitter:url", canonicalUrl);
     setMeta("twitter:image", ogImage);
+    setMeta("twitter:image:alt", siteConfig.name);
+    setMeta("author", siteConfig.author);
+    setMeta("application-name", siteConfig.name);
+    setMeta("apple-mobile-web-app-title", siteConfig.name);
+    setMeta("color-scheme", "light dark");
+    setMeta("referrer", "strict-origin-when-cross-origin");
+    setMeta("theme-color", "#0ea5e9");
     setMeta("robots", robots);
     setMeta("googlebot", robots);
-    document.documentElement.lang = "en";
+    document.documentElement.lang = siteConfig.language;
 
     // WebPage / Article structured data
     const pageSchema: Record<string, unknown> = {
@@ -100,15 +124,15 @@ export default function Seo({
       "@type": openGraphType === "article" ? "Article" : "WebPage",
       "@id": `${canonicalUrl}#${openGraphType === "article" ? "article" : "webpage"}`,
       "url": canonicalUrl,
-      "name": title || "InoBux",
-      "description": description,
-      "inLanguage": "en-US",
+      "name": resolvedTitle,
+      "description": resolvedDescription,
+      "inLanguage": siteConfig.language,
       "isPartOf": { "@id": `${BASE_URL}/#website` },
       "publisher": {
         "@type": "Organization",
         "@id": `${BASE_URL}/#organization`,
-        "name": "InoBux",
-        "logo": { "@type": "ImageObject", "url": `${BASE_URL}/logo1.png` }
+        "name": siteConfig.name,
+        "logo": { "@type": "ImageObject", "url": `${BASE_URL}${siteConfig.logoPath}` }
       },
     };
 
@@ -116,6 +140,11 @@ export default function Seo({
       pageSchema["datePublished"] = articleDate;
       pageSchema["dateModified"] = articleDate;
       pageSchema["image"] = ogImage;
+      setMetaProperty("article:published_time", articleDate);
+      setMetaProperty("article:modified_time", articleDate);
+    } else {
+      removeMetaProperty("article:published_time");
+      removeMetaProperty("article:modified_time");
     }
 
     setStructuredData("page", pageSchema);
@@ -129,10 +158,16 @@ export default function Seo({
           "@type": "ListItem",
           "position": i + 1,
           "name": crumb.name,
-          "item": `${BASE_URL}${crumb.path}`,
+          "item": crumb.path.startsWith("http") ? crumb.path : `${BASE_URL}${crumb.path}`,
         })),
       });
+    } else {
+      removeStructuredData("breadcrumb");
     }
+
+    return () => {
+      removeMeta("keywords");
+    };
   }, [title, description, canonicalPath, openGraphImage, openGraphType, robots, articleDate, breadcrumbs, keywords]);
 
   return null;

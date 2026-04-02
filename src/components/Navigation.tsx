@@ -31,7 +31,7 @@ const Navigation = () => {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
       <nav
-        className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-3 py-2 transition-all duration-500 sm:px-4 ${
+        className={`page-shell flex items-center justify-between rounded-full border px-3 py-2 transition-all duration-500 sm:px-4 ${
           isScrolled
             ? "glass-panel border-primary/20 shadow-[0_18px_60px_-24px_rgba(0,174,225,0.6)]"
             : "border-white/10 bg-black/25 backdrop-blur-md"
@@ -99,7 +99,7 @@ const Navigation = () => {
       </nav>
 
       {isOpen && (
-        <div className="mx-auto mt-3 max-w-7xl rounded-[2rem] border border-primary/20 bg-background/90 p-4 shadow-[0_20px_70px_-30px_rgba(0,174,225,0.6)] backdrop-blur-xl lg:hidden">
+        <div className="page-shell mt-3 rounded-[2rem] border border-primary/20 bg-background/90 p-4 shadow-[0_20px_70px_-30px_rgba(0,174,225,0.6)] backdrop-blur-xl lg:hidden">
           <div className="mb-4 flex items-center justify-between rounded-2xl bg-white/5 px-4 py-3">
             <div>
               <p className="text-sm font-semibold text-foreground">Explore Inobux</p>

@@ -10,11 +10,16 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Seo from "@/components/Seo";
 import ChatWidget from "@/components/home/ChatWidget";
+import { siteConfig } from "@/config/site.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((element) => {
         gsap.fromTo(
@@ -53,24 +58,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Seo
-        title="Inobux | AI Development, Web Platforms, Mobile Apps, ERP, CRM & UX"
+        title={siteConfig.defaultTitle}
         description="Inobux designs and builds immersive, high-performance digital products including AI solutions, web platforms, mobile apps, ERP systems, CRM development, analytics, and UI/UX."
         canonicalPath="/"
-        keywords={[
-          "AI development company",
-          "web development agency",
-          "mobile app development",
-          "ERP solutions",
-          "CRM development",
-          "UI UX design",
-          "data science services",
-          "AI chatbot integration",
-          "React development",
-          "Three.js website",
-        ]}
+        keywords={siteConfig.defaultKeywords}
       />
       <Navigation />
-      <main className="relative overflow-hidden">
+      <main id="main-content" className="relative overflow-hidden">
         <Hero />
         <div data-parallax className="pointer-events-none absolute left-0 top-[28rem] h-80 w-80 rounded-full bg-primary/10 blur-[120px]" />
         <Services />

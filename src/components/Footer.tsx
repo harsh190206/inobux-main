@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <footer className="relative border-t border-white/10 bg-black/30 px-4 py-12 backdrop-blur-md sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr_0.9fr_1fr]">
+      <div className="page-shell grid gap-10 lg:grid-cols-[1.1fr_0.9fr_0.9fr_1fr]">
         <div className="space-y-5">
           <div className="flex items-center gap-4">
             <div className="relative shine-border rounded-2xl p-[1px]">
@@ -78,7 +78,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-3 border-t border-white/10 pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+      <div className="page-shell mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; {currentYear} InoBux. All rights reserved. Built for performance, visibility, and growth.</p>
         <p>Semantic structure, optimized metadata, and scalable frontend architecture included.</p>
       </div>

@@ -7,7 +7,7 @@ import { projects } from "@/data/siteContent";
 const Portfolio = () => {
   return (
     <section id="portfolio" className="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-      <div className="mx-auto flex max-w-7xl flex-col gap-14">
+      <div className="page-shell flex flex-col gap-14">
         <SectionHeader
           eyebrow="Selected Work"
           title="Projects framed like premium case studies instead of a generic slider"

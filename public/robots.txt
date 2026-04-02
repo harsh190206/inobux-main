@@ -1,9 +1,8 @@
-# Allow all crawlers
 User-agent: *
 Allow: /
 Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /private/
 
-# Sitemap
+Host: https://www.inobux.com
 Sitemap: https://www.inobux.com/sitemap.xml
