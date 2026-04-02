@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 40% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 40% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 40% 12%;
+
+    --primary: 194 100% 44%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 194 100% 60%;
+
+    --secondary: 210 30% 94%;
+    --secondary-foreground: 222 40% 16%;
+
+    --muted: 214 28% 91%;
+    --muted-foreground: 218 14% 39%;
+
+    --accent: 210 30% 94%;
+    --accent-foreground: 222 40% 16%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 24% 84%;
+    --input: 214 24% 84%;
+    --ring: 194 100% 44%;
+
+    --radius: 1rem;
+    --page-radial-a: 194 100% 44%;
+    --page-radial-b: 194 100% 60%;
+    --page-base-a: 210 40% 99%;
+    --page-base-b: 210 38% 94%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 40% 12%;
+    --sidebar-primary: 194 100% 44%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 30% 94%;
+    --sidebar-accent-foreground: 222 40% 16%;
+    --sidebar-border: 214 24% 84%;
+    --sidebar-ring: 194 100% 44%;
+  }
+
+  .dark {
+    --background: 222 42% 6%;
+    --foreground: 210 28% 94%;
+
+    --card: 223 31% 10%;
+    --card-foreground: 210 28% 94%;
+
+    --popover: 223 31% 10%;
+    --popover-foreground: 210 28% 94%;
+
+    --primary: 194 100% 44%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 194 100% 60%;
+
+    --secondary: 220 24% 14%;
+    --secondary-foreground: 210 28% 94%;
+
+    --muted: 220 18% 24%;
+    --muted-foreground: 218 14% 69%;
+
+    --accent: 220 24% 14%;
+    --accent-foreground: 210 28% 94%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 93.3%;
+
+    --border: 220 24% 18%;
+    --input: 220 24% 18%;
+    --ring: 194 100% 44%;
+
+    --page-radial-a: 194 100% 44%;
+    --page-radial-b: 194 100% 60%;
+    --page-base-a: 222 42% 6%;
+    --page-base-b: 222 34% 9%;
+
+    --sidebar-background: 223 31% 10%;
+    --sidebar-foreground: 210 28% 94%;
+    --sidebar-primary: 194 100% 44%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 24% 14%;
+    --sidebar-accent-foreground: 210 28% 94%;
+    --sidebar-border: 220 24% 18%;
+    --sidebar-ring: 194 100% 44%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Space Grotesk", "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    letter-spacing: 0.01em;
+    background-image:
+      radial-gradient(circle at 12% 14%, hsl(var(--page-radial-a) / 0.14), transparent 24%),
+      radial-gradient(circle at 85% 12%, hsl(var(--page-radial-b) / 0.12), transparent 20%),
+      radial-gradient(circle at 50% 82%, hsl(var(--page-radial-a) / 0.12), transparent 24%),
+      linear-gradient(145deg, hsl(var(--page-base-a)), hsl(var(--page-base-b)));
+    background-attachment: fixed;
+  }
+
+  img {
+    display: block;
+  }
+
+  a,
+  button,
+  input,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: linear-gradient(135deg, hsl(var(--card) / 0.82), hsl(var(--card) / 0.58));
+    border: 1px solid hsl(var(--border) / 0.6);
+    box-shadow:
+      0 26px 70px -34px hsl(var(--primary) / 0.45),
+      inset 0 1px 0 hsl(0 0% 100% / 0.2);
+    backdrop-filter: blur(18px);
+  }
+
+  .depth-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border) / 0.45);
+    background:
+      linear-gradient(160deg, hsl(var(--card) / 0.94), hsl(var(--card) / 0.66));
+    box-shadow: 0 30px 90px -42px hsl(var(--primary) / 0.42);
+    transform-style: preserve-3d;
+    transition:
+      transform 0.5s ease,
+      border-color 0.35s ease,
+      box-shadow 0.5s ease;
+  }
+
+  .depth-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background:
+      radial-gradient(circle at 15% 15%, hsl(var(--primary) / 0.22), transparent 36%),
+      radial-gradient(circle at 100% 0%, hsl(var(--primary-glow) / 0.18), transparent 30%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .depth-card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(-4deg);
+    border-color: hsl(var(--primary) / 0.42);
+    box-shadow:
+      0 38px 100px -42px hsl(var(--primary) / 0.55),
+      0 10px 32px -16px hsl(222 40% 8% / 0.55);
+  }
+
+  .depth-card:hover::after {
+    opacity: 1;
+  }
+
+  .aurora-grid {
+    background-image:
+      linear-gradient(90deg, hsl(var(--primary) / 0.08) 1px, transparent 1px),
+      linear-gradient(0deg, hsl(var(--primary) / 0.08) 1px, transparent 1px);
+    background-size: 88px 88px;
+    mask-image: radial-gradient(circle at 50% 30%, black, transparent 70%);
+  }
+
+  .glow-line {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(120deg, transparent 10%, hsl(var(--primary) / 0.22), transparent 90%);
+    filter: blur(26px);
+    opacity: 0.55;
+  }
+
+  .floating-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(40px);
+    opacity: 0.65;
+    animation: float 18s ease-in-out infinite alternate;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .perspective-1200 {
+    perspective: 1200px;
+  }
+
+  .shine-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine-border::before {
+    content: "";
+    position: absolute;
+    inset: -120%;
+    background: conic-gradient(
+      from 120deg,
+      hsl(var(--primary) / 0.34),
+      transparent,
+      hsl(var(--primary-glow) / 0.28),
+      transparent
+    );
+    animation: spin 18s linear infinite;
+    opacity: 0.7;
+  }
+
+  .shine-border > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translate3d(0, -10px, 0) scale(1);
+  }
+  to {
+    transform: translate3d(0, 18px, 0) scale(1.06);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .depth-card:hover {
+    transform: translateY(-4px);
+  }
+}
